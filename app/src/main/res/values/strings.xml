@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Курсы валют</string>
+    <string name="exchange_rates">Курсы валют</string>
+    <string name="ticker">USD</string>
+    <string name="name_currency">Американский доллар</string>
+    <string name="value">72.35</string>
+    <string name="current_date">2021-03-17T11:30:00+03:00</string>
+</resources>
