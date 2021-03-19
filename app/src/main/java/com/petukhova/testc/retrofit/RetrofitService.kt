@@ -1,6 +1,5 @@
 package com.petukhova.testc.retrofit
 
-import android.annotation.SuppressLint
 import android.util.Log
 import com.petukhova.testc.R
 import com.petukhova.testc.model.ModelResponse
@@ -10,13 +9,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import splitties.toast.toast
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatterBuilder
-import java.util.*
-import java.util.Locale.ENGLISH
 
 class RetrofitService {
     private val retrofitImpl: RetrofitImp = RetrofitImp()
@@ -25,8 +17,8 @@ class RetrofitService {
         retrofitImpl.getRequest().getCurrency().enqueue(object : Callback<ModelResponse> {
 
             override fun onResponse(
-                    call: Call<ModelResponse>,
-                    response: Response<ModelResponse>,
+                call: Call<ModelResponse>,
+                response: Response<ModelResponse>,
             ) {
                 if (response.isSuccessful && response.body() != null)
                     makeData(response.body()!!)
@@ -43,21 +35,20 @@ class RetrofitService {
         })
     }
 
+    //получаем ответ от сервера и конвертируем полученные данные в currencyList = mutableListOf<MyModelCurrency>()
     private fun makeData(data: ModelResponse) {
         Log.i("makeData", "$data")
         val currencyList = mutableListOf<MyModelCurrency>()
-       // val currentDate = data.date
         val currencuMap = data.valute
         for ((key, value) in currencuMap) {
             println("Key is $key, value is $value")
-            val modelCurrency =  MyModelCurrency(value.charCode, value.name, value.value)
+            val modelCurrency = MyModelCurrency(value.charCode, value.name, value.value)
             currencyList.add(modelCurrency)
-            println(" наша модель  $modelCurrency ")
 
         }
 
         CurrencyRepositoryImpl.saveListCurrency(currencyList)
-        Log.i("передаем в репо", "$currencyList")
+        Log.i("передаем в репозиторий", "$currencyList")
     }
 
 

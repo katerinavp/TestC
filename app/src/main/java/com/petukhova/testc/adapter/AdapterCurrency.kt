@@ -26,8 +26,6 @@ class AdapterCurrency :
 
         fun bind(modelCurrency: MyModelCurrency) {
             with(binding) {
-                infoDate.setText("Данные на")
-               // currentDate.text = modelCurrency.date
                 ticker.text = modelCurrency.charCode
                 nameCurrency.text = modelCurrency.name
                 value.text = modelCurrency.value.toString()

@@ -11,9 +11,6 @@ import com.petukhova.testc.adapter.AdapterCurrency
 import com.petukhova.testc.databinding.ActivityMainBinding
 import com.petukhova.testc.viewmodel.CurrencyViewModel
 import kotlinx.coroutines.launch
-import splitties.activities.start
-import splitties.toast.toast
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,32 +20,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(binding.root)
+
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        val currencyViewModel: CurrencyViewModel = ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
+        val currencyViewModel: CurrencyViewModel =
+            ViewModelProviders.of(this).get(CurrencyViewModel::class.java)
 
         val adapter = AdapterCurrency()
         binding.recyclerView.adapter = adapter
 
-        binding.progressBar.isVisible = true
+        //загрузка данных по кнопке
+        binding.btnUpdate.setOnClickListener {
+            binding.progressBar.isVisible = true
+            lifecycleScope.launch { currencyViewModel.init() }
+        }
 
-        lifecycleScope.launch { currencyViewModel.init() }
         currencyViewModel.getData().observe(this, {
             binding.progressBar.isVisible = false
             adapter.submitList(it.toMutableList())
         })
 
-
-        binding.btnUpdate.setOnClickListener {
-            toast("запуск по кнопке")
-            lifecycleScope.launch { currencyViewModel.init() }
-        }
-        binding.btnConvert.setOnClickListener { goConvertActivity() }
-
-    }
-
-    fun goConvertActivity() {
-        start<ConvertActivity>()
     }
 
 }

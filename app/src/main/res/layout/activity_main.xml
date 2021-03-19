@@ -39,18 +39,18 @@
         android:layout_height="wrap_content"
         android:text="@string/update"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:layout_constraintBottom_toTopOf="@+id/btnConvert"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnConvert"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/convert"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpdate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"  />
+<!--    <Button-->
+<!--        android:id="@+id/btnConvert"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/convert"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnUpdate"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"  />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
