@@ -4,5 +4,16 @@
     <string name="ticker">USD</string>
     <string name="name_currency">Американский доллар</string>
     <string name="value">72.35</string>
-    <string name="current_date">2021-03-17T11:30:00+03:00</string>
+    <string name="current_date">2021-03-17 11:30</string>
+    <string name="info_date">Данные на</string>
+    <string name="update">Загрузить</string>
+    <string name="convert">Конвертировать</string>
+    <string name="rub">RUB</string>
+    <string name="result">Результат</string>
+    <string-array name="spinnerTicker">
+        <item></item>
+        <item>Мурзик</item>
+        <item>Васька</item>
+        <item>Рыжик</item>
+    </string-array>
 </resources>

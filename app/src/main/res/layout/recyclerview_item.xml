@@ -32,7 +32,7 @@
 
             <TextView
                 android:id="@+id/nameCurrency"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
@@ -41,8 +41,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ticker"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guidEnd"
                 tools:text="@string/name_currency" />
-
+            <TextView
+                android:id="@+id/infoDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="8sp"
+                app:layout_constraintEnd_toStartOf="@+id/currentDate"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/info_date" />
             <TextView
                 android:id="@+id/currentDate"
                 android:layout_width="wrap_content"
@@ -62,20 +72,29 @@
                 android:layout_marginBottom="8dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/rub"
+                app:layout_constraintEnd_toStartOf="@+id/imageRub"
                 app:layout_constraintTop_toBottomOf="@+id/currentDate"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="@string/value" />
 
-            <TextView
-                android:id="@+id/rub"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+            <ImageView
+                android:id="@+id/imageRub"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_ruble"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentDate" />
+                app:layout_constraintTop_toBottomOf="@+id/currentDate"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.65" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

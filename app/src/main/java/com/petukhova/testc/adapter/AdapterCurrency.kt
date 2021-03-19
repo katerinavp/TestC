@@ -5,14 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.petukhova.testc.databinding.RecyclerviewItemBinding
-import com.petukhova.testc.model.ModelCurrency
+import com.petukhova.testc.model.MyModelCurrency
 
-class AdapterCurrency : ListAdapter<ModelCurrency, AdapterCurrency.CurrencyViewHolder>(ModelCurrencyDiffer) {
+class AdapterCurrency :
+    ListAdapter<MyModelCurrency, AdapterCurrency.CurrencyViewHolder>(ModelCurrencyDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder =
-            CurrencyViewHolder(
-                    RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            )
+        CurrencyViewHolder(
+            RecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
 
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
@@ -20,18 +21,19 @@ class AdapterCurrency : ListAdapter<ModelCurrency, AdapterCurrency.CurrencyViewH
     }
 
     class CurrencyViewHolder(
-            private val binding: RecyclerviewItemBinding,
+        private val binding: RecyclerviewItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelCurrency: ModelCurrency) {
+        fun bind(modelCurrency: MyModelCurrency) {
             with(binding) {
-                ticker.text = modelCurrency.CharCode
-                nameCurrency.text = modelCurrency.Name
-                value.text = modelCurrency.Value.toString()
-//                currentDate.text = modelCurrency.
+                infoDate.setText("Данные на")
+                currentDate.text = modelCurrency.date
+                ticker.text = modelCurrency.charCode
+                nameCurrency.text = modelCurrency.name
+                value.text = modelCurrency.value.toString()
 
             }
         }
-    }
 
+    }
 }

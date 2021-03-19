@@ -1,12 +1,12 @@
 package com.petukhova.testc.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.petukhova.testc.model.ModelCurrency
+import com.petukhova.testc.model.MyModelCurrency
 
-object ModelCurrencyDiffer: DiffUtil.ItemCallback<ModelCurrency>() {
-    override fun areItemsTheSame(oldItem: ModelCurrency, newItem: ModelCurrency): Boolean =
-            oldItem.CharCode == newItem.CharCode
+object ModelCurrencyDiffer: DiffUtil.ItemCallback<MyModelCurrency>() {
+    override fun areItemsTheSame(oldItem: MyModelCurrency, newItem: MyModelCurrency): Boolean =
+            oldItem.charCode == newItem.charCode
 
 
-    override fun areContentsTheSame(oldItem: ModelCurrency, newItem: ModelCurrency): Boolean = oldItem == newItem
+    override fun areContentsTheSame(oldItem: MyModelCurrency, newItem: MyModelCurrency): Boolean = oldItem == newItem
 }
