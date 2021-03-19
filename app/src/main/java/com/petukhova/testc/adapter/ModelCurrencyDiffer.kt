@@ -5,7 +5,7 @@ import com.petukhova.testc.model.MyModelCurrency
 
 object ModelCurrencyDiffer: DiffUtil.ItemCallback<MyModelCurrency>() {
     override fun areItemsTheSame(oldItem: MyModelCurrency, newItem: MyModelCurrency): Boolean =
-            oldItem.charCode == newItem.charCode
+            oldItem.value == newItem.value
 
 
     override fun areContentsTheSame(oldItem: MyModelCurrency, newItem: MyModelCurrency): Boolean = oldItem == newItem

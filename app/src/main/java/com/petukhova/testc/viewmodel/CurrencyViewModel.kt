@@ -4,67 +4,51 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import com.petukhova.testc.model.MyModelCurrency
-import com.petukhova.testc.repository.CurrencyImpl
+import com.petukhova.testc.repository.CurrencyRepositoryImpl
+
+
+import com.petukhova.testc.retrofit.RetrofitService
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class CurrencyViewModel : ViewModel() {
-    private var data: MutableLiveData<List<MyModelCurrency>>? = null
-    var currencyRepository = CurrencyImpl()
+    //    private var listLiveData: MutableLiveData<List<MyModelCurrency>>
+    private var listLiveData: MutableLiveData<List<MyModelCurrency>> = MutableLiveData()
+//    private var listLiveData: MutableLiveData<List<MyModelCurrency>>? = null
+    private var service: RetrofitService = RetrofitService()
 
     private var listViewModel = mutableListOf<MyModelCurrency>()
-    //    private lateinit var listViewModel: MutableList<MyModelCurrency>
 
-//    fun getData(): List<MyModelCurrency> {
-//        Log.i("viewmodel вернули", "$listViewModel")
-//        return listViewModel
-//
-//    }
-
-//    fun saveData(list: List<MyModelCurrency>) {
-////        listViewModel = list.toMutableList()
-////        listViewModel.addAll(list)
-//        listViewModel.addAll(list)
-//        Log.i("viewmodel сохранили", "$listViewModel")
-
-//    }
-    fun getData(): LiveData<List<MyModelCurrency>> {
-
-        if (data == null) {
-            data = MutableLiveData()
-            loadData()
-        }
-        return data as MutableLiveData<List<MyModelCurrency>>
-
+    suspend fun init() {
+        updateListCurrency()
     }
 
-
-        fun loadData() {
-       // data?.value = currencyRepository.getAllCurrency()
-        data?.setValue(currencyRepository.getAllCurrency())
-        Log.i("loadData", "${currencyRepository.getAllCurrency()}")
-
-    }
-//    fun getData(): List<MyModelCurrency> {
-//        Log.i("viewmodel получилиnnn", "$listViewModel")
-//        return listViewModel
-//
-//    }
-//
-//    fun saveData(list: List<MyModelCurrency>) {
-////        listViewModel = list.toMutableList()
-////        listViewModel.addAll(list)
-//        listViewModel.addAll(list)
-//        Log.i("viewmodel получили", "$listViewModel")
-//
-//    }
-
-//    fun getData(): List<MyModelCurrency> {
-//       // Log.i("viewmodel вернули", "$listViewModel")
-////        if (listViewModel.isEmpty()){
-////            return null
-////        }else{
-//        return listViewModel
+        fun getData(): MutableLiveData<List<MyModelCurrency>> = listLiveData
+//    suspend fun getData(): MutableLiveData<List<MyModelCurrency>>? {
+//        if (listLiveData==null){
+//            //listLiveData = MutableLiveData()
+//            init()
 //        }
+//        return listLiveData
+//    }
+
+    suspend fun updateListCurrency() {
+        service.sendServerRequest()
+        Log.i("сервис", "запущен")
+
+        savelistLiveData()
+
+    }
+
+    suspend fun savelistLiveData() {
+        delay(1000)
+        listLiveData.postValue(CurrencyRepositoryImpl.getAllCurrency())
+        Log.i("loadData", "${listLiveData}")
+
+
+    }
 
 }
 

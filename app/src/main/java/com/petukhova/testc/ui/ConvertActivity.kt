@@ -22,7 +22,5 @@ class ConvertActivity: AppCompatActivity() {
 
     }
 
-   private fun setSpinner(){
 
-   }
 }

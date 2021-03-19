@@ -4,6 +4,6 @@ data class MyModelCurrency(
         var charCode: String,
         var name: String,
         var value: Double,
-        val date: String,
+        //val date: String,
 )
 

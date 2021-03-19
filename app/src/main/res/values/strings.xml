@@ -10,6 +10,7 @@
     <string name="convert">Конвертировать</string>
     <string name="rub">RUB</string>
     <string name="result">Результат</string>
+    <string name="error">Ошибка</string>
     <string-array name="spinnerTicker">
         <item></item>
         <item>Мурзик</item>

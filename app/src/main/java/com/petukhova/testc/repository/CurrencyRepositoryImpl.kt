@@ -7,20 +7,24 @@ import splitties.toast.toast
 import java.io.*
 import java.util.*
 
-class CurrencyImpl : CurrencyRepository {
-    var listCurrency: MutableList<MyModelCurrency> = mutableListOf()
-    //val currencyViewModel = CurrencyViewModel()
+object CurrencyRepositoryImpl : CurrencyRepository {
+    private var listCurrency: MutableList<MyModelCurrency> = mutableListOf()
 
     override fun saveListCurrency(list: List<MyModelCurrency>) {
-        // listCurrency = mutableListOf()
-        //val selectedSeries = series.toMutableList()
+        listCurrency.clear()
         listCurrency.addAll(list)
 
         Log.i("saveListCurrency", "$listCurrency")
         Log.i("getAllCurrency", "$listCurrency")
+        //Log.i("getAllCurrency", "$listCurrency")
 
     }
 
-    override fun getAllCurrency(): List<MyModelCurrency> = listCurrency
+    override fun getAllCurrency(): List<MyModelCurrency> {
+        Log.i("saveListCurrency", "$listCurrency")
+        Log.i("getAllCurrency", "$listCurrency")
+        return listCurrency
+    }
+
 
 }
