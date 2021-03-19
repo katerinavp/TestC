@@ -42,12 +42,12 @@ class MainActivity : AppCompatActivity() {
 
 //        adapter.submitList(currencyViewModel.getData())
         // currencyViewModel.getData().observe(this,  adapter::submitList)
-        //lifecycleScope.launch {
 
-      //  }
 
         // При нажатии на кнопки загрузить данные и отобразить
-        binding.btnUpdate.setOnClickListener { server.sendServerRequest() }
+        lifecycleScope.launch {
+            binding.btnUpdate.setOnClickListener { server.sendServerRequest() }
+        }
         binding.btnConvert.setOnClickListener { goConvertActivity() }
         //подписываем адаптер на изменения списка
 //        adapter.submitList(currencyViewModel.getData())

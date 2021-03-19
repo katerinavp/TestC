@@ -1,12 +1,14 @@
 package com.petukhova.testc.server
 
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.petukhova.testc.model.ModelResponse
 import com.petukhova.testc.model.MyModelCurrency
 import com.petukhova.testc.repository.CurrencyImpl
 import com.petukhova.testc.repository.CurrencyRepository
 import com.petukhova.testc.retrofit.RetrofitImp
 import com.petukhova.testc.viewmodel.CurrencyViewModel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,34 +21,35 @@ class Server {
     // lateinit var adapter: AdapterCurrency
     private val currencyViewModel = CurrencyViewModel()
 
- fun sendServerRequest() {
+       suspend fun sendServerRequest() {
+            retrofitImpl.getRequest().getCurrency().enqueue(object : Callback<ModelResponse> {
+                override fun onResponse(
+                        call: Call<ModelResponse>,
+                        response: Response<ModelResponse>,
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        makeData(response.body()!!)
+                        println("Тело запроса" + "${response.body()}")
+                        Log.i("Auth go", "${response.body()}")
+                    } else {
+                        Log.i("Ош", "${response.body()}")
+                        //makeData(null, Throwable("Ответ от сервера пустой"))
+                    }
+                    //binding.progressBar.isInvisible = true
 
-        retrofitImpl.getRequest().getCurrency().enqueue(object : Callback<ModelResponse> {
-            override fun onResponse(
-                call: Call<ModelResponse>,
-                response: Response<ModelResponse>,
-            ) {
-                if (response.isSuccessful && response.body() != null) {
-                    makeData(response.body()!!)
-                    println("Тело запроса" + "${response.body()}")
-                    Log.i("Auth go", "${response.body()}")
-                } else {
-                    Log.i("Ош", "${response.body()}")
-                    //makeData(null, Throwable("Ответ от сервера пустой"))
                 }
-                //binding.progressBar.isInvisible = true
 
-            }
+                override fun onFailure(call: Call<ModelResponse>, t: Throwable) {
+                    toast("Ошибка")
+                    Log.i("Ошибка", "$t")
 
-            override fun onFailure(call: Call<ModelResponse>, t: Throwable) {
-                toast("Ошибка")
-                Log.i("Ошибка", "$t")
+                }
 
-            }
+            })
+        }
 
-        })
 
-    }
+
 
 
     private fun makeData(data: ModelResponse) {
@@ -57,7 +60,7 @@ class Server {
         for ((key, value) in currencuMap) {
             println("Key is $key, value is $value")
             val modelCurrency =
-                MyModelCurrency(value.charCode, value.name, value.value, currentDate)
+                    MyModelCurrency(value.charCode, value.name, value.value, currentDate)
             //val currencyList = mutableListOf<ModelCurrency>()
             currencyList.add(modelCurrency)
             println(" наша модель  $modelCurrency ")
@@ -65,7 +68,7 @@ class Server {
 
 
         }
-       // currencyViewModel.saveData(currencyList)
+        // currencyViewModel.saveData(currencyList)
         currencyRepository.saveListCurrency(currencyList)
         Log.i("передаем в репо", "$currencyList")
     }
